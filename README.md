@@ -6,8 +6,8 @@
 ## How Start
 ```npm init```  
 ```npm run dev```
-[!NOTE]
-> Useful information that users should know, even when skimming content.
+> [!NOTE]
+> Proxy 已設定自動啟動，部屬後需再確認
 
 ## Skill&Tools
 * express
