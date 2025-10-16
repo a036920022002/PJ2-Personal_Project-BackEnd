@@ -9,8 +9,8 @@ const {connectDB}=require('./config/db')
 const config= require('./config/config');
 const aboutmeRoute = require ('./routes/aboutme');
 const educationRoute = require ('./routes/education');
-// var indexRouter = require('./routes/index');
-// var usersRouter = require('./routes/users');
+const workexperienceRoute = require ('./routes/workexperience');
+
 
 var app = express();
 connectDB();
@@ -27,6 +27,7 @@ app.use(cors());
 // app.use('/api/error',errorRouter)
 app.use('/api/aboutme',aboutmeRoute)
 app.use('/api/education',educationRoute)
+app.use('/api/workexperience',workexperienceRoute)
 // app.use('/', indexRouter);
 // app.use('/users', usersRouter);
 
