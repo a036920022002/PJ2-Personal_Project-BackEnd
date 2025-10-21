@@ -1,19 +1,17 @@
 require('dotenv').config();
-var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors=require('cors');
-const {connectDB}=require('./config/db')
-const config= require('./config/config');
+// const {connectDB}=require('./config/db')
+const db =require('./config/db')
 const aboutmeRoute = require ('./routes/aboutme');
 const educationRoute = require ('./routes/education');
 const workexperienceRoute = require ('./routes/workexperience');
 
 
 var app = express();
-connectDB();
 
 // Middlewares
 app.use(logger('dev'));
@@ -21,6 +19,9 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+//靜態圖片使用
+app.use('/images', express.static(path.join(__dirname, 'public/images')));
 
 //Route 
 app.use(cors());

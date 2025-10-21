@@ -4,11 +4,10 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "dev": "concurrently \"npm:proxy\" \"npm:server\"",
-    "proxy": "start cmd /k \"C:\\Users\\Double\\Desktop\\PJ2-personalprofile-backend\\cloud-sql-proxy.exe --port 3307 personalpro-474606:us-central1:carlychang\"",
-    "server": "wait-on tcp:127.0.0.1:3307 && nodemon ./bin/www"
+    "dev": "nodemon ./bin/www"
   },
   "dependencies": {
+    "better-sqlite3": "^12.4.1",
     "cookie-parser": "~1.4.4",
     "cors": "^2.8.5",
     "debug": "~2.6.9",
@@ -17,7 +16,8 @@
     "http-errors": "~1.6.3",
     "jade": "~1.11.0",
     "morgan": "~1.9.1",
-    "mysql2": "^3.15.2"
+    "mysql2": "^3.15.2",
+    "sqlite3": "^5.1.7"
   },
   "devDependencies": {
     "concurrently": "^9.2.1",
