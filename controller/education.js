@@ -2,13 +2,18 @@
 
 const db = require('../config/db')
 
-function education(req,res){
-     try {
-        const rows = db.prepare('SELECT * FROM education').all();
-        res.json({ success: true, data: rows });
+const education = async (req, res) => { 
+    try {
+        const [rows] = await db.query('SELECT * FROM education');   
+        const result = rows.map(row => ({
+            ...row,
+        }));
+        res.json({ success: true, data: result });
+        console.log('rows', rows);
     } catch (err) {
         res.status(500).json({ success: false, message: err.message });
     }
 };
+
 
 module.exports = education;

@@ -1,15 +1,15 @@
 //以models 方式撰寫
+const {getAllExp} = require('../models/workexperience')
 
-const { getAllWorkExperience } = require('../models/workexperience')
-const db = require('../config/db')
-
-function workexperience(req,res){
-    try {
-        const rows = db.prepare('SELECT * FROM workexperience').all();
-        res.json({ success: true, data: rows });
-    } catch (err) {
-        res.status(500).json({ success: false, message: err.message });
+const getexp = async (req, res) => { 
+    try{
+        const exp = await getAllExp();
+        res.json(exp);;
+        console.log(exp)
     }
-};
+    catch(err){
+        res.status(500).json({error:err.message});
+    }
+}
 
-module.exports = workexperience;
+module.exports = {getexp}

@@ -1,9 +1,8 @@
-const { connectDB } = require('../config/db');
+const  pool = require('../config/db');
 
-async function getAllWorkExperience() {
-  const pool = await connectDB();
+async function getAllExp() {
   const [rows] = await pool.query('SELECT * FROM workexperience');
   return rows;
 }
 
-module.exports = { getAllWorkExperience };
+module.exports = { getAllExp };
