@@ -9,6 +9,7 @@ const db =require('./config/db')
 const aboutmeRoute = require ('./routes/aboutme');
 const educationRoute = require ('./routes/education');
 const workexperienceRoute = require ('./routes/workexperience');
+const worksRoute = require ('./routes/works');
 
 
 var app = express();
@@ -25,12 +26,11 @@ app.use('/images', express.static(path.join(__dirname, 'public/images')));
 
 //Route 
 app.use(cors());
-// app.use('/api/error',errorRouter)
 app.use('/api/aboutme',aboutmeRoute)
 app.use('/api/education',educationRoute)
 app.use('/api/workexperience',workexperienceRoute)
-// app.use('/', indexRouter);
-// app.use('/users', usersRouter);
+app.use('/api/works',worksRoute)
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
