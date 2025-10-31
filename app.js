@@ -22,6 +22,13 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+<<<<<<< Updated upstream
+=======
+//靜態圖片使用
+app.use('/images', express.static(path.join(__dirname, 'public/images')));
+app.use('/images/aboutme', express.static(path.join(__dirname, 'public/images')));
+
+>>>>>>> Stashed changes
 //Route 
 app.use(cors());
 // app.use('/api/error',errorRouter)
