@@ -1,8 +1,6 @@
 //先以不建立models 方式寫
 
-const { connectDB } = require('../config/db')
-
-
+const db = require('../config/db')
 
 const education = async (req, res) => { 
     try {
@@ -11,11 +9,12 @@ const education = async (req, res) => {
             ...row,
         }));
         res.json({ success: true, data: result });
-        
+        console.log('rows', rows);
     } catch (err) {
         res.status(500).json({ success: false, message: err.message });
 
     }
 };
+
 
 module.exports = education;

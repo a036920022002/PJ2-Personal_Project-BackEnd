@@ -9,4 +9,5 @@ router.post('/upload',upload.single('file'),uploadphoto);
 router.put('/update',updateAboutme)
 
 
+
 module.exports = router;
