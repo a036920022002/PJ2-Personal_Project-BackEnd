@@ -1,5 +1,5 @@
 //以models 方式撰寫
-const {getAllWork, getWorkById} = require('../models/works')
+const {getAllWork, getWorkById, updateWorks, deleteWorks, createWorks} = require('../models/works')
 const BASE_URL = process.env.BASE_URL; 
 
 const getworks = async (req, res) => { 
@@ -47,7 +47,39 @@ const getidwork = async (req, res) => {
         res.status(500).json({error:err.message});
     }
 }
+const updateWork = async (req, res) => {
+    try{
+        await updateWorks(req.body);
+        res.json({success: true, message: '更新成功' })
+
+    }catch(err){
+         res.status(500).json({success: false, message: '更新失敗'});
+    }
+
+ }
+
+const delWork = async (req, res) => {
+    try{
+        const id= req.body.id
+        await deleteWorks(id);
+        return res.json({ success: true, message: '刪除成功'});
+    }catch(err){
+        console.error(err);
+        return res.status(500).json({ success: false, message: '伺服器錯誤' });
+    }
+
+ }
+
+const createWork = async (req, res) => {
+    try{
+        const newItem = await createWorks(req.body);
+        res.json({ success: true, message: '更新成功',id: newItem.insertId });
+    }catch(err){
+        console.error(err);
+        res.status(500).json({ success: false, message: '新增失敗' });
+    }
+ }
 
 
 
-module.exports = {getworks,getidwork}
+module.exports = {getworks,getidwork,updateWork, delWork, createWork}
