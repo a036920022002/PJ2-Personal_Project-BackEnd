@@ -111,5 +111,5 @@ const updateAboutme = async (req, res) => {
 };
 
 
-module.exports = {getaboutme, uploadphoto, updateAboutme, upload};
+module.exports = {getaboutme, uploadphoto, updateAboutme,upload};
 

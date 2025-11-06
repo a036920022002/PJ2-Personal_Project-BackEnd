@@ -74,7 +74,20 @@ async function createWorks(item){
   return { ...item, id: rows.insertId };
 }
 
+async function uploadWorks(filenames,id){
+  try{
+    const sql=`
+    UPDATE works SET image = ? WHERE id=?`
+    const values = [JSON.stringify(filenames) ,id]
+    const [result] = await pool.query(sql,values);
+    return result
+  }catch(err){
+    console.error('uploadWorks error:', err);
+    throw err;
+  }
+}
 
 
 
-module.exports = { getAllWork, getWorkById, updateWorks, deleteWorks, createWorks };
+
+module.exports = { getAllWork, getWorkById, updateWorks, deleteWorks, createWorks,uploadWorks };
