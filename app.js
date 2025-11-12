@@ -10,6 +10,8 @@ const aboutmeRoute = require ('./routes/aboutme');
 const educationRoute = require ('./routes/education');
 const workexperienceRoute = require ('./routes/workexperience');
 const worksRoute = require ('./routes/works');
+const authRoute = require ('./routes/auth');
+
 
 
 var app = express();
@@ -32,6 +34,7 @@ app.use('/api/aboutme',aboutmeRoute)
 app.use('/api/education',educationRoute)
 app.use('/api/workexperience',workexperienceRoute)
 app.use('/api/works',worksRoute)
+app.use('/api/auth',authRoute)
 
 
 // catch 404 and forward to error handler
