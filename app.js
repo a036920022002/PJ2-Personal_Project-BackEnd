@@ -11,6 +11,7 @@ const educationRoute = require ('./routes/education');
 const workexperienceRoute = require ('./routes/workexperience');
 const worksRoute = require ('./routes/works');
 const authRoute = require ('./routes/auth');
+const certificateRoute = require ('./routes/certificate');
 
 
 
@@ -35,7 +36,7 @@ app.use('/api/education',educationRoute)
 app.use('/api/workexperience',workexperienceRoute)
 app.use('/api/works',worksRoute)
 app.use('/api/auth',authRoute)
-
+app.use('/api/certificate',certificateRoute)
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -49,9 +49,6 @@ const getidwork = async (req, res) => {
 }
 const updateWork = async (req, res) => {
     try {
-    console.log('🧩 接收到前端資料:', req.body);
-
-    // 解析所有可能被 stringify 的欄位
     const parseJSON = (value) => {
       if (typeof value === 'string') {
         try {
@@ -76,10 +73,10 @@ const updateWork = async (req, res) => {
     res.json({ success: true, result });
     }catch(err){
         console.error('❌ UPDATE WORKS ERROR:', err);
-    res.status(500).json({
-      error: 'Internal Server Error',
-      message: err.message,
-      stack: err.stack,
+        res.status(500).json({
+        error: 'Internal Server Error',
+        message: err.message,
+        stack: err.stack,
     });
     }
 
