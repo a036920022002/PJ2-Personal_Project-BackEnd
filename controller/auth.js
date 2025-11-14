@@ -1,6 +1,7 @@
 const db = require('../config/db')
 const path = require('path');
 const generateToken = require('../middleware/generateToken');
+const {hash,comparepassword} = require('../middleware/bcrypt');
 // const bcrypt = require('bcrypt')
 
 const authlogin = async (req, res) => { 
@@ -10,17 +11,10 @@ const authlogin = async (req, res) => {
         if(member.length===0){
             return res.status(401).json({message:"帳號不存在"})
         }
-        console.log("member",member)
+       
         const user = member[0]
-        console.log("user",user)
-
-        // 後續待加上bcrypt
-        // const isMatch = await bcrypt.compare(password, member.password)
-        // if(!isMatch){
-        // return res.status(401).json({message:"密碼錯誤"}) 
-        // }
-
-        if(password !== user.password){
+        const isMatch = await comparepassword(password, user.password)
+        if(!isMatch){
             return res.status(401).json({message:"密碼錯誤"})
         }
 
@@ -50,12 +44,13 @@ const getAllAuth = async(req,res)=>{
 const createAccount = async(req,res)=>{
     try{
         const {email,password,name}=req.body
-        console.log("req.body",req.body)
+        console.log("req.body",req.body.password)
         if(!email&&!password){
            return res.status(401).json({message:"缺少email 或password"})
         }
+        const hashpassword = await hash(req.body.password)
         const sql = `INSERT INTO auth (email,password,name) values (?,?,?)`
-        const values = [email, password, name];
+        const values = [email, hashpassword, name];
 
         const [result] = await db.execute(sql, values);
         return res.json({ success: true, message: '更新成功',id: result.insertId });

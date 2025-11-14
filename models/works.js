@@ -2,6 +2,7 @@ const  pool = require('../config/db');
 
 async function getAllWork() {
   const [rows] = await pool.query('SELECT * FROM works');
+  
   return rows;
 }
 
@@ -29,18 +30,18 @@ async function updateWorks(item) {
   WHERE id = ?
   `;
   const values = [ 
-    item.name, 
-    item.descript, 
-    JSON.stringify(item.frontEnd),
-    JSON.stringify(item.backEnd),
-    item.database_name,
-    JSON.stringify(item.tool),
-    JSON.stringify(item.function_name), 
-    JSON.stringify(item.gitHub_link), 
-    item.page_link,
-    item.item_label,
-    item.id
-  ];
+  item.name, 
+  item.descript, 
+  JSON.stringify(item.frontEnd || []),
+  JSON.stringify(item.backEnd || []),      
+  item.database_name,
+  JSON.stringify(item.tool || []),
+  JSON.stringify(item.function_name || []),
+  JSON.stringify(item.gitHub_link || []),  
+  item.page_link,
+  item.item_label,
+  item.id
+];
   const [rows] = await pool.query(sql, values);
   return rows;
 }

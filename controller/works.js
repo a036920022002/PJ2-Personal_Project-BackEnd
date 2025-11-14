@@ -39,7 +39,7 @@ const getidwork = async (req, res) => {
         } catch {
             imageArray = [];
         }
-        work.imageUrl = imageArray.map(photoname => `${BASE_URL}/images/${photoname}`);
+        work.imageUrl = imageArray.map(photoname => `${BASE_URL}/images/works/${id}/${photoname}`);
         
         res.json(work);
     }
@@ -48,12 +48,39 @@ const getidwork = async (req, res) => {
     }
 }
 const updateWork = async (req, res) => {
-    try{
-        await updateWorks(req.body);
-        res.json({success: true, message: '更新成功' })
+    try {
+    console.log('🧩 接收到前端資料:', req.body);
 
+    // 解析所有可能被 stringify 的欄位
+    const parseJSON = (value) => {
+      if (typeof value === 'string') {
+        try {
+          return JSON.parse(value);
+        } catch {
+          return value; // 若不是合法 JSON 就原樣返回
+        }
+      }
+      return value;
+    };
+
+    const item = {
+      ...req.body,
+      frontEnd: parseJSON(req.body.frontEnd),
+      backEnd: parseJSON(req.body.backEnd),
+      tool: parseJSON(req.body.tool),
+      function_name: parseJSON(req.body.function_name),
+      gitHub_link: parseJSON(req.body.gitHub_link),
+    };
+
+    const result = await updateWorks(item);
+    res.json({ success: true, result });
     }catch(err){
-         res.status(500).json({success: false, message: '更新失敗'});
+        console.error('❌ UPDATE WORKS ERROR:', err);
+    res.status(500).json({
+      error: 'Internal Server Error',
+      message: err.message,
+      stack: err.stack,
+    });
     }
 
  }
