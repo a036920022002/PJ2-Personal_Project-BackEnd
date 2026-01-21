@@ -20,7 +20,7 @@
 ## 🛠 主要功能
 * Auth API：負責使用者註冊、登入驗證及 Token 核發。
 * Profile & Experience API：動態提供個人基本資訊、教育背景與專業技術列表。
-* Project API：完整存取各項開發專案的詳細說明與網址。
+* Works API：完整存取各項開發專案的詳細說明與網址。
 
 ## 🔗 相關連結
 * **Live Demo:** [點此查看成品](https://myprofile.zeabur.app/homepage)
